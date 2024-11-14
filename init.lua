@@ -64,6 +64,20 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
+local function open_tree_and_terminal()
+  arg = vim.fn.argv(0)
+
+  if arg == nil or arg == '' or vim.fn.isdirectory(arg) == 1 then
+    vim.api.nvim_command("ToggleTerm")
+    vim.api.nvim_command("NvimTreeToggle")
+    vim.api.nvim_command("stopinsert")
+  end
+end
+
+vim.api.nvim_create_autocmd("vimEnter", {
+  callback = open_tree_and_terminal
+})
+
 vim.api.nvim_set_keymap("n", "<C-t>", ":ToggleTerm<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true})
 
@@ -71,6 +85,11 @@ vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("n", "<C-Left", ":vertical resize -2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-Up>", ":resize +2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-Down>", ":resize -2<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 
