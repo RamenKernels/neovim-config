@@ -27,6 +27,8 @@ vim.cmd([[
 
 require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
+  use("nvim-lua/plenary.nvim")
+  
 
   use({
     "akinsho/toggleterm.nvim",
@@ -35,19 +37,51 @@ require("packer").startup(function(use)
     end,
   })
 
-  use({
+  use {
     "nvim-tree/nvim-tree.lua",
     requires = {
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("nvim-tree").setup()
+      require("nvim-tree").setup {
+        hijack_cursor = true,
+        view = {
+          centralize_selection = true,
+          
+        },
+      }
+    end,
+  }
+
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require("telescope").setup()
     end,
   })
+
 
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate"
+  })
+
+  use({
+    "akinsho/bufferline.nvim",
+    tag = "*",
+    requires = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('bufferline').setup {
+        options = {
+          numbers = "buffer_id",
+          seperator_style = "slant",
+          show_buffer_close_icons = false,
+          show_close_icon = false,
+          offsets = {{filetype = "NvimTree", text = "File Explorer", padding = 1}},
+        }
+      }
+    end,
   })
 
   use 'folke/tokyonight.nvim'
@@ -91,6 +125,9 @@ vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<CR>", { noremap =
 vim.api.nvim_set_keymap("n", "<C-Up>", ":resize +2<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-Down>", ":resize -2<CR>", { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+
 vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 
 vim.o.number = true
@@ -101,4 +138,4 @@ vim.o.expandtab = true
 
 vim.cmd("syntax on")
 
-vim.cmd("colorscheme tokyonight-moon")
+vim.cmd("colorscheme tokyonight-night")
