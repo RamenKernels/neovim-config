@@ -18,6 +18,8 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+require('packer').startup()
+
 vim.cmd([[
   augroup packer_user_config
     autocmd!

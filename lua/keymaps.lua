@@ -11,6 +11,6 @@ vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<CR>", { noremap =
 vim.api.nvim_set_keymap("n", "<C-Up>", ":resize +2<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-Down>", ":resize -2<CR>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "<C-Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-Shift-h>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
