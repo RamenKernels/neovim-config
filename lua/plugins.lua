@@ -1,7 +1,8 @@
 require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
   use("nvim-lua/plenary.nvim")
-  
+
+  use("folke/snacks.nvim")
 
   use({
     "akinsho/toggleterm.nvim",
@@ -91,6 +92,7 @@ require("packer").startup(function(use)
   })
 
   use 'folke/tokyonight.nvim'
+  use 'colors.basictheme'
 
   if packer_bootstrap then
     require("packer").sync()

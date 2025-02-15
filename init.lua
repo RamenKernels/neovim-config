@@ -29,6 +29,8 @@ vim.cmd([[
 
 require('plugins')
 
+require('colors/basictheme')
+
 local function open_tree_and_terminal()
   arg = vim.fn.argv(0)
 
