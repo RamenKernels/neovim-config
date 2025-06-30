@@ -1,105 +1,62 @@
-require("packer").startup(function(use)
-  use("wbthomason/packer.nvim")
-  use("nvim-lua/plenary.nvim")
-  
-
-  use({
-    "akinsho/toggleterm.nvim",
+return {
+  { 'nvim-lua/plenary.nvim' },
+  { 'nvim-lua/popup.nvim' },
+  { 'nvim-tree/nvim-web-devicons' },
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+  { 'nvim-telescope/telescope.nvim', dependencies = { 'plenary.nvim' } },
+  { 'nvim-tree/nvim-tree.lua', dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("toggleterm").setup()
+      require("nvim-tree").setup()
     end,
-  })
-
-  use {
-    "nvim-tree/nvim-tree.lua",
-    requires = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("nvim-tree").setup {
-        hijack_cursor = true,
-        view = {
-          centralize_selection = true,
-          
-        },
-      }
-    end,
-  }
-
-  use({
-    "nvim-telescope/telescope.nvim",
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require("telescope").setup()
-    end,
-  })
-
-
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate"
-  })
-
---  use({
---    "akinsho/bufferline.nvim",
---    tag = "*",
---    requires = 'nvim-tree/nvim-web-devicons',
---    config = function()
---      require('bufferline').setup {
---        options = {
---          numbers = "buffer_id",
---          seperator_style = "slant",
---          show_buffer_close_icons = false,
---          show_close_icon = false,
---          offsets = {{filetype = "NvimTree", text = "File Explorer", padding = 1}},
---        }
---      }
---    end,
---  })
-
-  use({
-    'hrsh7th/nvim-cmp',
-    requires = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'saadparwaiz1/cmp_luasnip'
-    },
-    config = function()
-      local cmp = require'cmp'
-
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-          end,
-        },
-        mapping = {
-          ['<Tab>'] = cmp.mapping.select_next_item(),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-          ['<S-CR>'] = cmp.mapping.confirm({ select = true }),
-        },
-        sources = cmp.config.sources({
-          { name = 'nvim-lsp' },
-          { name = 'luasnip' },
-        }, {
-          { name = 'buffer' },
-        })
-      }
-    end,
-  })
-
-  use 'folke/tokyonight.nvim'
-
-  if packer_bootstrap then
-    require("packer").sync()
-  end
-end)
-
-require('nvim-treesitter.configs').setup({
-  ensure_installed = { "java" },
-  highlight = {
-    enable = true,
   },
-})
+  { 'folke/noice.nvim', dependencies = { 'MunifTanjim/nui.nvim' } },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("toggleterm").setup({
+        direction = "horizontal",
+        open_mapping = [[<c-\>]],
+      })
+    end,
+  },
+  { 'lukas-reineke/indent-blankline.nvim' },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("lualine").setup({
+        options = {
+          theme = "auto",  -- or "tokyonight", "catppuccin", etc.
+          icons_enabled = true,
+          section_separators = "",
+          component_separators = "|",
+        },
+      })
+    end,
+  },
+  { 'hrsh7th/nvim-cmp' },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'saadparwaiz1/cmp_luasnip' },
+  { 'L3MON4D3/LuaSnip' },
+  { "neovim/nvim-lspconfig" },
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
+  { "folke/trouble.nvim" },
+  { "nvimdev/lspsaga.nvim" },
+  { "stevearc/conform.nvim" },
+  { "mfussenegger/nvim-lint" },
+  { "lewis6991/gitsigns.nvim" },
+  { "tpope/vim-fugitive" },
+  { "projekt0n/github-nvim-theme" },
+  { "numToStr/Comment.nvim" },
+  { "lukas-reineke/indent-blankline.nvim" },
+  { "nvim-lualine/lualine.nvim" },
+  { "folke/which-key.nvim" },
+  { "ThePrimeagen/harpoon" },
+  { "windwp/nvim-autopairs" },
+  { "kylechui/nvim-surround" },
+  { "echasnovski/mini.nvim", version = "*" },
+  { "mfussenegger/nvim-dap" },
+  { "rcarriga/nvim-dap-ui" },
+}

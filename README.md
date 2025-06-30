@@ -1,2 +1,2 @@
 # neovim-config
-My lightweight neovim config
+## My very simple minded neovim config
