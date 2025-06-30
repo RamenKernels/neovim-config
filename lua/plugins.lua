@@ -4,7 +4,15 @@ return {
   { 'nvim-tree/nvim-web-devicons' },
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   { 'nvim-telescope/telescope.nvim', dependencies = { 'plenary.nvim' } },
-  { 'nvim-tree/nvim-tree.lua', dependencies = { "nvim-tree/nvim-web-devicons" },
+  { "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
   },
   { 'folke/noice.nvim', dependencies = { 'MunifTanjim/nui.nvim' } },
   {
