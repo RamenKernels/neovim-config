@@ -64,4 +64,5 @@ return {
   { "echasnovski/mini.nvim", version = "*" },
   { "mfussenegger/nvim-dap" },
   { "rcarriga/nvim-dap-ui" },
+  { "martineausimon/nvim-lilypond-suite" }
 }
